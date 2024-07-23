@@ -11,7 +11,7 @@ connection
         console.log("Conexao feita com banco de dados!")
     })
     .catch((msgErro) => {
-
+        console.log("Erro na conexao com o banco de dados!")
     });
 
 //Estou dizendo ao express para usar o ejs como view engine

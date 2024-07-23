@@ -25,7 +25,6 @@ app.use(bodyParser.json());
 
 //Rota utilizando o metodo render do ejs
 app.get("/", (req, res) => {
-    //Definindo as variaveis que serao exibidas no html
     res.render("index");
 });
 
@@ -34,7 +33,7 @@ app.get("/perguntar", (req, res) => {
     res.render("perguntar");
 });
 
-//Rota que recebe o formulario do html
+//Rota que recebe os campos do formulario html
 app.post("/salvarpergunta", (req, res) => {
     var titulo = req.body.titulo;  //Recebo os dados do formulário e salvo dentro das variaveis
     var descricao = req.body.descricao;

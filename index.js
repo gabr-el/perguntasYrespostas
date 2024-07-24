@@ -66,12 +66,29 @@ app.get("/pergunta/:id", (req, res) => {
         where: { id: id }
     }).then(pergunta => {
         if (pergunta != undefined) { //Pergunta encontrada
-            res.render("pergunta", {
-                pergunta: pergunta
+            Pergunta.findAll({
+                where: { perguntaId: pergunta.id },
+                order: [['id', 'DESC']]
+            }).then(pergunta => {
+                res.render("pergunta", {
+                    pergunta: pergunta,
+                    respostas: respostas
+                });
             });
         } else {  //Pergunta nao encontrada
             res.redirect("/");
         }
+    })
+})
+
+app.post("/responder", (req, res) => {
+    var corpo = req.body.corpo;
+    var perguntaId = req.body.pergunta;
+    Resposta.create({
+        corpo: corpo,
+        perguntaId: perguntaId
+    }).then(() => {
+        res.redirect("/pergunta/" + perguntaId);
     })
 })
 

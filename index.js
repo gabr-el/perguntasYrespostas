@@ -48,8 +48,6 @@ app.get("/perguntar", (req, res) => {
 app.post("/salvarpergunta", (req, res) => {
     var titulo = req.body.titulo;  //Recebo os dados do formulário e salvo dentro das variaveis
     var descricao = req.body.descricao;
-    console.log(titulo);
-    console.log(descricao);
     //Faço um insert na minha tabela perguntas passando os dados do formulario
     Pergunta.create({
         titulo: titulo,
@@ -66,10 +64,10 @@ app.get("/pergunta/:id", (req, res) => {
         where: { id: id }
     }).then(pergunta => {
         if (pergunta != undefined) { //Pergunta encontrada
-            Pergunta.findAll({
+            Resposta.findAll({
                 where: { perguntaId: pergunta.id },
                 order: [['id', 'DESC']]
-            }).then(pergunta => {
+            }).then(respostas => {
                 res.render("pergunta", {
                     pergunta: pergunta,
                     respostas: respostas
